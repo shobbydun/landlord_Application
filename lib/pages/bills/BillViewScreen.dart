@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:landify/pages/bills/biils_detailsScreen.dart';
 import 'package:landify/pages/bills/bills_model.dart';
+import 'package:landify/pages/reminder_automation.dart';
 import 'package:landify/pages/tenants_screen.dart';
 
 class BillViewScreen extends StatelessWidget {
@@ -172,9 +173,9 @@ class BillViewScreen extends StatelessWidget {
     );
   }
 
-  // Method to build a reminder section
   Widget _buildReminderSection(BuildContext context) {
-    bool isReminderSet = bill != null && bill!.reminderSet != null && bill!.reminderSet!;
+    bool isReminderSet =
+        bill != null && bill!.reminderSet != null && bill!.reminderSet!;
 
     return Card(
       margin: EdgeInsets.only(bottom: 16.0),
@@ -206,15 +207,16 @@ class BillViewScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: bill != null
                       ? () {
-                          // Trigger reminder logic here (e.g., sending an SMS or WhatsApp message)
-                          // For now, just mark as reminder set
-                          FirebaseFirestore.instance
-                              .collection('bills')
-                              .doc(bill!.id)
-                              .update({'reminderSet': true});
+                          // Navigate to Reminder Automation Screen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ReminderAutomation(),
+                            ),
+                          );
                         }
                       : null,
-                  child: Text('Set Reminder'),
+                  child: Text('Set Reminder',style: TextStyle(color: Colors.white),),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                   ),

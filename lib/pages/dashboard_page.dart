@@ -336,7 +336,7 @@ class DashboardPage extends StatelessWidget {
           ),
           SpeedDialChild(
             child: Icon(Icons.payment),
-            label: 'Add Bill/Payment',
+            label: 'Bills/Payments',
             onTap: () {
               Navigator.push(
                 context,
@@ -348,7 +348,7 @@ class DashboardPage extends StatelessWidget {
           ),
           SpeedDialChild(
             child: Icon(Icons.analytics),
-            label: 'Generate Report',
+            label: 'Check Reports',
             onTap: () {
               Navigator.push(
                 context,

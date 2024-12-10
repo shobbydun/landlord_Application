@@ -116,118 +116,144 @@ class _BillsScreenState extends State<BillsScreen> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      appBar: AppBar(
-        title: Text("Bills Overview"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            // Search bar for tenant name or apartment
-            TextField(
-              onChanged: (value) {
-                setState(() {
-                  searchQuery = value;
-                });
-                _applyFilters();
-              },
-              decoration: InputDecoration(
-                labelText: 'Search by name or apartment',
-                prefixIcon: Icon(Icons.search),
+ @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Colors.grey[300],
+    body: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Custom header section
+          Row(
+            children: [
+              // IconButton(
+              //   icon: Icon(Icons.arrow_back, color: Colors.black),
+              //   onPressed: () {
+              //     Navigator.pop(context);
+              //   },
+              // ),
+              SizedBox(width: 10),
+              Text(
+                "Bills Overview", // Title
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
               ),
+            ],
+          ),
+          SizedBox(height: 20),
+
+          // Search bar for tenant name or apartment
+          TextField(
+            onChanged: (value) {
+              setState(() {
+                searchQuery = value;
+              });
+              _applyFilters();
+            },
+            decoration: InputDecoration(
+              labelText: 'Search by name or apartment',
+              prefixIcon: Icon(Icons.search),
             ),
+          ),
 
-            // Filter and sort controls
-            Row(
-              children: [
-                // Filter for unpaid bills only
-                Row(
-                  children: [
-                    Text('Unpaid Only'),
-                    Switch(
-                      value: showUnpaidOnly,
-                      onChanged: (value) {
-                        setState(() {
-                          showUnpaidOnly = value;
-                        });
-                        _applyFilters();
-                      },
-                    ),
-                  ],
-                ),
+          SizedBox(height: 16),
 
-                // Sort by earliest due date
-                Row(
-                  children: [
-                    Text('Sort by Due Date'),
-                    Switch(
-                      value: sortByEarliestDueDate,
-                      onChanged: (value) {
-                        setState(() {
-                          sortByEarliestDueDate = value;
-                        });
-                        _applyFilters();
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-
-            // Loading indicator or list of tenants
-            isLoading
-                ? Center(child: CircularProgressIndicator())
-                : Expanded(
-                    child: ListView.builder(
-                      itemCount: filteredTenants.length,
-                      itemBuilder: (context, index) {
-                        final tenant = filteredTenants[index];
-                        final bill = tenantBills[tenant.id];
-
-                        // Set default values if no bill is found
-                        final billAmount = bill?.totalAmount ?? 0.0;
-                        final dueDate = bill != null
-                            ? bill.dueDate
-                            : DateTime.now().add(Duration(days: 30));
-                        final isPaid = bill?.isPaid ?? false;
-
-                        return Card(
-                          margin: EdgeInsets.only(bottom: 10),
-                          elevation: 3,
-                          child: ListTile(
-                            title: Text(tenant.name),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Apartment: ${tenant.apartment}"),
-                                Text("Amount: Kshs ${billAmount.toStringAsFixed(2)}"),
-                                Text(
-                                  'Due Date: ${DateFormat('MM/dd/yyyy').format(dueDate)}',
-                                ),
-                                Text(
-                                  isPaid ? "Status: Paid" : "Status: Not Paid",
-                                  style: TextStyle(
-                                    color: isPaid ? Colors.green : Colors.red,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            trailing: Icon(Icons.arrow_forward),
-                            onTap: () => _viewBillsForTenant(tenant, bill),
-                          ),
-                        );
-                      },
-                    ),
+          // Filter and sort controls
+          Row(
+            children: [
+              // Filter for unpaid bills only
+              Row(
+                children: [
+                  Text('Unpaid Only'),
+                  Switch(
+                    value: showUnpaidOnly,
+                    onChanged: (value) {
+                      setState(() {
+                        showUnpaidOnly = value;
+                      });
+                      _applyFilters();
+                    },
                   ),
-          ],
-        ),
+                ],
+              ),
+
+              SizedBox(width: 16),
+
+              // Sort by earliest due date
+              Row(
+                children: [
+                  Text('Sort by Due Date'),
+                  Switch(
+                    value: sortByEarliestDueDate,
+                    onChanged: (value) {
+                      setState(() {
+                        sortByEarliestDueDate = value;
+                      });
+                      _applyFilters();
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+
+          SizedBox(height: 16),
+
+          // Loading indicator or list of tenants
+          isLoading
+              ? Center(child: CircularProgressIndicator())
+              : Expanded(
+                  child: ListView.builder(
+                    itemCount: filteredTenants.length,
+                    itemBuilder: (context, index) {
+                      final tenant = filteredTenants[index];
+                      final bill = tenantBills[tenant.id];
+
+                      // Set default values if no bill is found
+                      final billAmount = bill?.totalAmount ?? 0.0;
+                      final dueDate = bill != null
+                          ? bill.dueDate
+                          : DateTime.now().add(Duration(days: 30));
+                      final isPaid = bill?.isPaid ?? false;
+
+                      return Card(
+                        margin: EdgeInsets.only(bottom: 10),
+                        elevation: 3,
+                        child: ListTile(
+                          title: Text(tenant.name),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Apartment: ${tenant.apartment}"),
+                              Text("Amount: Kshs ${billAmount.toStringAsFixed(2)}"),
+                              Text(
+                                'Due Date: ${DateFormat('MM/dd/yyyy').format(dueDate)}',
+                              ),
+                              Text(
+                                isPaid ? "Status: Paid" : "Status: Not Paid",
+                                style: TextStyle(
+                                  color: isPaid ? Colors.green : Colors.red,
+                                ),
+                              ),
+                            ],
+                          ),
+                          trailing: Icon(Icons.arrow_forward),
+                          onTap: () => _viewBillsForTenant(tenant, bill),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   void _viewBillsForTenant(Tenant tenant, Bill? bill) {
     // Check if the bill is not null and has a non-zero total amount

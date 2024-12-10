@@ -6,7 +6,7 @@ import 'package:landify/pages/home_page.dart';
 import 'package:landify/pages/bills/bill_screen.dart';
 import 'package:landify/pages/reminder_automation.dart';
 import 'package:landify/pages/reports_screen.dart';
-import 'package:landify/pages/settings_screen.dart';
+import 'package:landify/pages/staff_screen.dart';
 import 'package:landify/pages/tenants_screen.dart';
 
 void main() async {
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           '/tenants': (context) => TenantsScreen(),
           '/bills': (context) => BillsScreen(),
           '/reports': (context) => ReportsScreen(),
-          '/settings': (context) => SettingsScreen(),
+          '/staff': (context) => StaffScreen(),
           '/reminder_automation': (context) => ReminderAutomation(),
         });
   }

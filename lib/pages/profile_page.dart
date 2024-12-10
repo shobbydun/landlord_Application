@@ -8,8 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:landify/authentication/auth_page.dart';
 import 'package:landify/pages/maintenance_repairs.dart';
 import 'package:landify/pages/properties_page.dart';
-import 'package:landify/pages/rent_screen.dart';
-import 'package:landify/pages/settings_screen.dart';
+import 'package:landify/pages/reports_screen.dart';
+import 'package:landify/pages/staff_screen.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -363,7 +363,7 @@ Future<void> _getUserData() async {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => RentScreen()),
+          MaterialPageRoute(builder: (context) => ReportsScreen()),
         );
         break;
       case 2:
@@ -375,7 +375,7 @@ Future<void> _getUserData() async {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SettingsScreen()),
+          MaterialPageRoute(builder: (context) => StaffScreen()),
         );
         break;
       default:
@@ -393,7 +393,7 @@ Future<void> _getUserData() async {
       case 2:
         return Icons.build;
       case 3:
-        return Icons.settings;
+        return Icons.people;
       default:
         return Icons.help;
     }
@@ -407,9 +407,9 @@ Future<void> _getUserData() async {
       case 1:
         return "Rental Income";
       case 2:
-        return "Maintenance Requests";
+        return "Maintenance";
       case 3:
-        return "Settings";
+        return "Staff";
       default:
         return "Unknown";
     }
@@ -425,7 +425,7 @@ Future<void> _getUserData() async {
       case 2:
         return "Track your property maintenance requests";
       case 3:
-        return "Manage your profile and preferences";
+        return "Manage your Staff\nWages and Personal Details";
       default:
         return "Unknown";
     }
