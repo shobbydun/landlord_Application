@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "258730011220",
+    "project_id": "landify-ca8bb",
+    "storage_bucket": "landify-ca8bb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258730011220:android:4ad9e1af8fa0c38f381bc1",
+        "android_client_info": {
+          "package_name": "com.example.landify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258730011220-0l6oli0qvrq5nsfm5bj3dffmd24ht1p5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.landify",
+            "certificate_hash": "0b8472c2a6c8d0c9685285d9566cedd83724fdea"
+          }
+        },
+        {
+          "client_id": "258730011220-bcb27p7q8564nmmlpkmfp8i43orcurpk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUJR0LrhXwSo1q7QOitGr52c7JxN_mDdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258730011220-bcb27p7q8564nmmlpkmfp8i43orcurpk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "258730011220-mktufaitav683ssbuvgo4eg0634lml8o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.landify"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
